@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مانع الإعلانات الذكي</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .stats {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .stat-item {
+            background-color: white;
+            padding: 10px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2196F3;
+        }
+        
+        .stat-label {
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        button:hover {
+            background-color: #1976D2;
+        }
+        
+        .whitelist-btn {
+            background-color: #4CAF50;
+        }
+        
+        .export-btn {
+            background-color: #FF9800;
+        }
+        
+        .reset-stats {
+            background-color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>مانع الإعلانات الذكي</h2>
+        
+        <div>
+            <label class="switch">
+                <input type="checkbox" id="enableToggle">
+                <span class="slider"></span>
+            </label>
+            <span>تفعيل مانع الإعلانات</span>
+        </div>
+        
+        <div class="stats">
+            <h3>إحصائيات الحظر</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalBlocked">0</div>
+                    <div class="stat-label">إجمالي المحظورات</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="domBlocked">0</div>
+                    <div class="stat-label">عناصر الصفحة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="networkBlocked">0</div>
+                    <div class="stat-label">طلبات الشبكة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="lastReset">-</div>
+                    <div class="stat-label">آخر تحديث</div>
+                </div>
+            </div>
+            <button class="reset-stats" id="resetStats">إعادة تعيين الإحصائيات</button>
+        </div>
+        
+        <div class="buttons">
+            <button class="whitelist-btn" id="openWhitelist">إدارة القائمة البيضاء</button>
+            <button class="export-btn" id="exportFeedback">تصدير التغذية الراجعة</button>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
